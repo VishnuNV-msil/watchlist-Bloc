@@ -18,7 +18,7 @@ class UserRepository {
        final string = jsonEncode(listdata);
           await pref.setString('user_list', string);
 
-       var values = pref .setString('savedlist', response.body);
+       //var values = pref .setString('savedlist', response.body);
        //log('saved data is: ${userList.toString()}');
 
       return resdata.map((e) => UserModel.fromJson(e)).toList();

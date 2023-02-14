@@ -4,6 +4,7 @@ import '../bloc/user_bloc.dart';
 import '../model/user_model.dart';
 import '../repo/repositories.dart';
 import '../screens/search_screen.dart';
+import '../screens/watchlist_screen.dart';
 import './widgets/list.dart';
 
 class HomePage extends StatelessWidget {
@@ -37,9 +38,13 @@ class HomePage extends StatelessWidget {
               ]),
               title: const Text('The WatchlistApp')),
           body: TabBarView(children: [
-            blocBody(),
-            SearchPage(1),
-            SearchPage(2),
+            //blocBody(),
+            // SearchPage(1),
+            // SearchPage(2),
+            // SearchPage(3),
+            WatchlistPage(1),
+            WatchlistPage(2),
+            WatchlistPage(3),
           ]),
         ),
       ),

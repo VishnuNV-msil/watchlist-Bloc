@@ -11,8 +11,10 @@ part 'user_state.dart';
 class UserBloc extends Bloc<UserEvent, UserState> {
   final UserRepository _userRepository;
   List<UserModel> userList = [];
-  List<UserModel> watchList1 = [];
+   List<UserModel> watchList1 = [];
   List<UserModel> watchList2 = [];
+  List<UserModel> watchList3 = [];
+ 
 
   UserBloc(this._userRepository) : super(UserInitialState()) {
     on<UserEvent>((event, emit) {
