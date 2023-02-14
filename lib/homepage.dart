@@ -73,18 +73,4 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget blocBody3() {
-    return BlocProvider(
-      create: (context) => UserBloc(
-        UserRepository(),
-      ),
-      child: BlocBuilder<UserBloc, UserState>(
-        builder: (context, state) {
-          return const Center(
-            child: Text("Custom Watchlist"),
-          );
-        },
-      ),
-    );
-  }
 }
