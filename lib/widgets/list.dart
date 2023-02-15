@@ -12,7 +12,7 @@ Widget UserList(List<UserModel> userList) {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
           child: Card(
-            color: Colors.green,
+            color: Colors.black12,
             child: ListTile(
               title: Text(
                 '${userList[index].name} ',

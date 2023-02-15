@@ -38,10 +38,6 @@ class HomePage extends StatelessWidget {
               ]),
               title: const Text('The WatchlistApp')),
           body: TabBarView(children: [
-            //blocBody(),
-            // SearchPage(1),
-            // SearchPage(2),
-            // SearchPage(3),
             WatchlistPage(1),
             WatchlistPage(2),
             WatchlistPage(3),
@@ -49,33 +45,6 @@ class HomePage extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Widget blocBody() {
-    return BlocProvider(
-      create: (context) => UserBloc(
-        UserRepository(),
-      )..add(LoadUserEvent()),
-      child: BlocBuilder<UserBloc, UserState>(
-        builder: (context, state) {
-          if (state is UserLoadingState) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if (state is UserLoadedState) {
-            List<UserModel> userList = state.users;
-            return UserList(userList);
-          }
-          if (state is UserErrorState) {
-            return const Center(
-              child: Text("Error"),
-            );
-          }
-          return Container();
-        },
-      ),
-    );
-  }
+  }  
 
 }

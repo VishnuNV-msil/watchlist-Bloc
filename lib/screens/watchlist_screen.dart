@@ -19,7 +19,7 @@ class WatchlistPage extends StatelessWidget {
       body: BlocProvider(
         create: (context) => UserBloc(
           UserRepository(),
-        )..add(LoadUserEvent()),
+        )..add(LoadUserEvent(watchlistnum)),
         child: BlocBuilder<UserBloc, UserState>(
           builder: (context, state) {
             if (state is UserLoadingState) {
@@ -28,8 +28,8 @@ class WatchlistPage extends StatelessWidget {
               );
             }
             if (state is UserLoadedState) {
-
               List<UserModel> userList = state.users;
+               //List<UserModel> userList =  getlistdata();
               return Container(
                 child: UserList(userList),
                 height: MediaQuery.of(context).size.height - 100,
@@ -59,18 +59,38 @@ class WatchlistPage extends StatelessWidget {
     );
   }
 
-  Future<List<UserModel>> getlistdata() async {
-var preferences = await SharedPreferences.getInstance();
-List<UserModel> userlist = [];
-  final string = preferences.getString('user_list');
-    if (string != null) {
-      final userList = jsonDecode(string) as List;
-      userlist = userList.map((e) => UserModel.fromJson(e)).toList();
-    } else {
-      print('list is null');
-    }
+  // Future<List<UserModel>> getlistdata() async {
+  //   List<UserModel> userlist = [];
+  //   var preferences = await SharedPreferences.getInstance();
 
-    return userlist;
+  //   if (watchlistnum == 1) {
+  //     final string1 = preferences.getString('watchlist1');
+  //     if (string1 != null) {
+  //       final userList = jsonDecode(string1) as List;
+  //       userlist = userList.map((e) => UserModel.fromJson(e)).toList();
+  //     } else {
+  //       print('list1 is null');
+  //     }
+  //   } else if (watchlistnum == 2) {
+  //     final string2 = preferences.getString('watchlist2');
+  //     if (string2 != null) {
+  //       final userList = jsonDecode(string2) as List;
+  //       userlist = userList.map((e) => UserModel.fromJson(e)).toList();
+  //     } else {
+  //       print('list2 is null');
+  //     }
+  //   } else {
+  //     final string3 = preferences.getString('watchlist3');
+  //     if (string3 != null) {
+  //       final userList = jsonDecode(string3) as List;
+  //       userlist = userList.map((e) => UserModel.fromJson(e)).toList();
+  //     } else {
+  //       print('list3 is null');
+  //     }
+  //   }
+  //   return userlist;
+  // }
 
-  }
+
+
 }

@@ -5,6 +5,8 @@ abstract class UserEvent extends Equatable {
 }
 
 class LoadUserEvent extends UserEvent {
+  final int intData;
+  LoadUserEvent(this.intData);
   @override
   List<Object?> get props => [];
 }
