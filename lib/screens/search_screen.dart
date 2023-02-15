@@ -41,7 +41,7 @@ class SearchPage extends StatelessWidget {
             if (state is SearchInitial) {
               return Column(
                 children: [
-                  SearchBar(context),
+                  searchBar(context),
                 ],
               );
             }
@@ -51,13 +51,13 @@ class SearchPage extends StatelessWidget {
               return SingleChildScrollView(
                 child: Column(
                   children: [
-                    SearchBar(context),
+                    searchBar(context),
                     SizedBox(
                       height: MediaQuery.of(context).size.height - 160,
                       width: MediaQuery.of(context).size.width,
                       child: BlocBuilder<CheckboxBloc, CheckboxState>(
                         builder: (context, state) {
-                          return SearchList(userList, context);
+                          return searchList(userList, context);
                         },
                       ),
                     ),
@@ -68,7 +68,7 @@ class SearchPage extends StatelessWidget {
             if (state is SearchErrorState) {
               return Column(
                 children: [
-                  SearchBar(context),
+                  searchBar(context),
                   const Expanded(
                     child: Text("No matching result"),
                   ),
@@ -112,8 +112,7 @@ class SearchPage extends StatelessWidget {
     }
   }
 
-  Widget SearchBar(BuildContext context) {
-    bool checkbox = false;
+  Widget searchBar(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,7 +142,7 @@ class SearchPage extends StatelessWidget {
     );
   }
 
-  Widget SearchList(List<UserModel> userList, BuildContext context) {
+  Widget searchList(List<UserModel> userList, BuildContext context) {
     return Expanded(
       child: ListView.builder(
         itemCount: userList.length,

@@ -8,7 +8,7 @@ import './search_screen.dart';
 
 class WatchlistPage extends StatelessWidget {
   int watchlistnum;
-  List<UserModel> LoadedUserlist = [];
+  List<UserModel> loadedUserlist = [];
   WatchlistPage(this.watchlistnum);
 
   @override
@@ -26,10 +26,10 @@ class WatchlistPage extends StatelessWidget {
               );
             }
             if (state is UserLoadedState) {
-              LoadedUserlist = state.users;
+              loadedUserlist = state.users;
               return SizedBox(
                 height: MediaQuery.of(context).size.height - 100,
-                child: userList(LoadedUserlist),
+                child: userList(loadedUserlist),
               );
             }
             if (state is UserErrorState) {
@@ -47,7 +47,7 @@ class WatchlistPage extends StatelessWidget {
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => SearchPage(watchlistnum, LoadedUserlist),
+              builder: (context) => SearchPage(watchlistnum, loadedUserlist),
             ),
           );
         },
