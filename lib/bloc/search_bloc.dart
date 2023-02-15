@@ -23,7 +23,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         int watchlistnum = event.intData;
 
         if (watchlistnum == 1) {
-          final string1 = preferences.getString('watchlist1');
+          final string1 = preferences.getString('tempwatchlist1');
           if (string1 != null) {
             final userList = jsonDecode(string1) as List;
             userlist = userList.map((e) => UserModel.fromJson(e)).toList();
@@ -38,7 +38,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
             emit(SearchErrorState('no matching results found'));
           }
         } else if (watchlistnum == 2) {
-          final string2 = preferences.getString('watchlist2');
+          final string2 = preferences.getString('tempwatchlist2');
           if (string2 != null) {
             final userList = jsonDecode(string2) as List;
             userlist = userList.map((e) => UserModel.fromJson(e)).toList();
@@ -53,7 +53,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
             emit(SearchErrorState('no matching results found'));
           }
         } else {
-          final string3 = preferences.getString('watchlist3');
+          final string3 = preferences.getString('tempwatchlist3');
           if (string3 != null) {
             final userList = jsonDecode(string3) as List;
             userlist = userList.map((e) => UserModel.fromJson(e)).toList();

@@ -112,17 +112,17 @@ class SearchPage extends StatelessWidget {
       List<UserModel> watchlist1 = templist;
       log('watchlist1 is : ${watchlist1.toString()}');
       final string = jsonEncode(templist);
-      await preferences.setString('watchlist1', string);
+      await preferences.setString('tempwatchlist1', string);
     } else if (watchlistnum == 2) {
       List<UserModel> watchlist2 = templist;
       log('watchlist2 is : ${watchlist2.toString()}');
       final string = jsonEncode(templist);
-      await preferences.setString('watchlist2', string);
+      await preferences.setString('tempwatchlist2', string);
     } else {
       List<UserModel> watchlist3 = templist;
       log('watchlist3 is : ${watchlist3.toString()}');
       final string = jsonEncode(templist);
-      await preferences.setString('watchlist3', string);
+      await preferences.setString('tempwatchlist3', string);
     }
 
     if (string != null) {
@@ -162,7 +162,8 @@ class SearchPage extends StatelessWidget {
             onSubmitted: (value) {
               getdata(_controller.text);
               _controller.clear();
-              BlocProvider.of<SearchBloc>(context).add(FetchDataEvent(watchlistnum));
+              BlocProvider.of<SearchBloc>(context)
+                  .add(FetchDataEvent(watchlistnum));
             },
             controller: _controller,
             //keyboardType: TextInputType.number,
@@ -208,10 +209,8 @@ class SearchPage extends StatelessWidget {
                   addtoDB(userlist1);
                   BlocProvider.of<CheckboxBloc>(context)
                       .add(CheckboxPressEvent());
-
                 },
                 selected: false,
-
                 value: sel.contains(index),
               ),
             ),
@@ -232,11 +231,9 @@ class SearchPage extends StatelessWidget {
       final strList1 = jsonEncode(userlist);
        pref.setString('watchlist1', strList1);
     } else if (watchlistnum == 2) {
-      pref.setString('watchlist2', stringlist);
       final strList2 = jsonEncode(userlist);
        pref.setString('watchlist2', strList2);
     } else {
-      pref.setString('watchlist3', stringlist);
       final strList3 = jsonEncode(userlist);
        pref.setString('watchlist3', strList3);
     }
