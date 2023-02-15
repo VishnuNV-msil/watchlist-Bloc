@@ -18,13 +18,12 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   UserBloc(this._userRepository) : super(UserInitialState()) {
     on<UserEvent>((event, emit) {
-      // TODO: implement event handler
     });
     on<LoadUserEvent>((event, emit) async {
       emit(UserLoadingState());
       try {
         List<UserModel> userlist = [];
-        List<UserModel> userlist2 = [];
+        List<UserModel> emptylist = [];
         var preferences = await SharedPreferences.getInstance();
         int watchlistnum = event.intData;
 
@@ -32,11 +31,10 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       if (fullListstring != null) {
         final userList = jsonDecode(fullListstring) as List;
         userlist = userList.map((e) => UserModel.fromJson(e)).toList();
-        emit(UserLoadedState(userlist2));
+        emit(UserLoadedState(emptylist));
       } else {
-         final users2 = await _userRepository.getUsers();
-         emit(UserLoadedState(userlist2));
-        print('list1 is null');
+         final apiResponse = await _userRepository.getUsers();
+         emit(UserLoadedState(emptylist));
       }
 
 
@@ -47,7 +45,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         userlist = userList.map((e) => UserModel.fromJson(e)).toList();
         emit(UserLoadedState(userlist));
       } else {
-        print('list1 is null');
       }
     } else if (watchlistnum == 2) {
       final string2 = preferences.getString('watchlist2');
@@ -56,7 +53,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         userlist = userList.map((e) => UserModel.fromJson(e)).toList();
         emit(UserLoadedState(userlist));
       } else {
-        print('list2 is null');
       }
     } else {
       final string3 = preferences.getString('watchlist3');
@@ -65,7 +61,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         userlist = userList.map((e) => UserModel.fromJson(e)).toList();
         emit(UserLoadedState(userlist));
       } else {
-        print('list3 is null');
       }
     }
       } catch (e) {
