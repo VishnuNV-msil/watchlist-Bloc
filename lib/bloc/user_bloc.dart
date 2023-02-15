@@ -27,7 +27,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         List<UserModel> userlist = [];
         var preferences = await SharedPreferences.getInstance();
         int watchlistnum = event.intData;
-        
+        final users2 = await _userRepository.getUsers();
 
 
 
