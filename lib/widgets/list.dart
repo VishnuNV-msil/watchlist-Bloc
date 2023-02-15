@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import '../model/user_model.dart';
 
 Widget UserList(List<UserModel> userList) {
-  log('called listview from search');
   return Expanded(
     child: ListView.builder(
       itemCount: userList.length,

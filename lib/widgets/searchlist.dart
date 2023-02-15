@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import '../model/user_model.dart';
-import '../bloc/checkbox_bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 Widget SearchList(List<UserModel> userList) {
-  print('called listview from search');
-  List<int> sel = [2, 3, 4];
+  List<int> sel = [];
   return Expanded(
     child: ListView.builder(
       itemCount: userList.length,
@@ -28,23 +24,10 @@ Widget SearchList(List<UserModel> userList) {
               activeColor: Colors.green,
               checkColor: Colors.white,
               onChanged: (value) {
-                
                 sel.add(index);
-
-                // if (checkbox) {
-                //   checkbox = false;
-                // } else {
-                //   checkbox = true;
-                // }
               },
               selected: false,
               value: sel.contains(index),
-              // trailing:
-              // IconButton(
-              //   icon: const Icon(Icons.add),
-              //   onPressed: () async {
-
-              //   },)
             ),
           ),
         );
