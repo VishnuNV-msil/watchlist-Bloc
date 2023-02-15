@@ -29,7 +29,6 @@ class WatchlistPage extends StatelessWidget {
             }
             if (state is UserLoadedState) {
               List<UserModel> userList = state.users;
-               //List<UserModel> userList =  getlistdata();
               return Container(
                 child: UserList(userList),
                 height: MediaQuery.of(context).size.height - 100,
@@ -48,7 +47,6 @@ class WatchlistPage extends StatelessWidget {
         tooltip: 'Increment',
         child: const Icon(Icons.add),
         onPressed: () {
-          //SearchPage(watchlistnum);
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => SearchPage(watchlistnum),
@@ -58,39 +56,5 @@ class WatchlistPage extends StatelessWidget {
       ),
     );
   }
-
-  // Future<List<UserModel>> getlistdata() async {
-  //   List<UserModel> userlist = [];
-  //   var preferences = await SharedPreferences.getInstance();
-
-  //   if (watchlistnum == 1) {
-  //     final string1 = preferences.getString('watchlist1');
-  //     if (string1 != null) {
-  //       final userList = jsonDecode(string1) as List;
-  //       userlist = userList.map((e) => UserModel.fromJson(e)).toList();
-  //     } else {
-  //       print('list1 is null');
-  //     }
-  //   } else if (watchlistnum == 2) {
-  //     final string2 = preferences.getString('watchlist2');
-  //     if (string2 != null) {
-  //       final userList = jsonDecode(string2) as List;
-  //       userlist = userList.map((e) => UserModel.fromJson(e)).toList();
-  //     } else {
-  //       print('list2 is null');
-  //     }
-  //   } else {
-  //     final string3 = preferences.getString('watchlist3');
-  //     if (string3 != null) {
-  //       final userList = jsonDecode(string3) as List;
-  //       userlist = userList.map((e) => UserModel.fromJson(e)).toList();
-  //     } else {
-  //       print('list3 is null');
-  //     }
-  //   }
-  //   return userlist;
-  // }
-
-
 
 }
