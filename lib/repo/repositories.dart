@@ -9,7 +9,6 @@ class UserRepository {
     final url = (Uri.parse(
         'http://5e53a76a31b9970014cf7c8c.mockapi.io/msf/getContacts'));
     var response = await http.get(url);
-    //log(response.body);
     if (response.statusCode == 200) {
       List resdata = json.decode(response.body);
 
@@ -17,9 +16,6 @@ class UserRepository {
        List<UserModel> listdata = resdata.map((e) => UserModel.fromJson(e)).toList();
        final string = jsonEncode(listdata);
           await pref.setString('user_list', string);
-
-       //var values = pref .setString('savedlist', response.body);
-       //log('saved data is: ${userList.toString()}');
 
       return resdata.map((e) => UserModel.fromJson(e)).toList();
     } else {

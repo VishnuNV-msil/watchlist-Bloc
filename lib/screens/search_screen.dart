@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -86,11 +85,9 @@ class SearchPage extends StatelessWidget {
     );
   }
 
-  Future<bool> getdata(String txt) async {
-    print('get data called');
+  Future<void> getdata(String txt) async {
     var preferences = await SharedPreferences.getInstance();
     List<UserModel> userlist = [];
-
     final string = preferences.getString('user_list');
     if (string != null) {
       final userList = jsonDecode(string) as List;
@@ -98,46 +95,21 @@ class SearchPage extends StatelessWidget {
     } else {
       print('list is null');
     }
-
-    var values = (preferences.getString('savedlist'));
-    if (watchlistnum == 1) {}
-
     List<UserModel> templist = [];
-
     for (int i = 0; i < userlist.length; i++) {
       if (userlist.elementAt(i).name.contains(txt)) {
         templist.add(userlist.elementAt(i));
       } else {}
     }
     if (watchlistnum == 1) {
-      List<UserModel> watchlist1 = templist;
-      log('watchlist1 is : ${watchlist1.toString()}');
       final string = jsonEncode(templist);
       await preferences.setString('tempwatchlist1', string);
     } else if (watchlistnum == 2) {
-      List<UserModel> watchlist2 = templist;
-      log('watchlist2 is : ${watchlist2.toString()}');
       final string = jsonEncode(templist);
       await preferences.setString('tempwatchlist2', string);
     } else {
-      List<UserModel> watchlist3 = templist;
-      log('watchlist3 is : ${watchlist3.toString()}');
       final string = jsonEncode(templist);
       await preferences.setString('tempwatchlist3', string);
-    }
-
-    if (string != null) {
-      print('saved data is: ${values}');
-      if (string.contains(txt)) {
-        print('true result found');
-        return true;
-      } else {
-        print('false no matching result');
-        return false;
-      }
-    } else {
-      print('false outside');
-      return false;
     }
   }
 
@@ -166,7 +138,6 @@ class SearchPage extends StatelessWidget {
                   .add(FetchDataEvent(watchlistnum));
             },
             controller: _controller,
-            //keyboardType: TextInputType.number,
           ),
         ),
       ],
