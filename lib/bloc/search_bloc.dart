@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'dart:convert';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +14,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
   SearchBloc() : super(SearchInitial()) {
     on<FetchDataEvent>((event, emit) async {
-      print('called search bloc');
       emit(SearchLoadingState());
       try {
         List<UserModel> userlist = [];
@@ -28,14 +26,12 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
             final userList = jsonDecode(string1) as List;
             userlist = userList.map((e) => UserModel.fromJson(e)).toList();
              if (userList.isEmpty) {
-              emit(SearchErrorState('no matching results found'));
-
+              emit(const SearchErrorState('no matching results found'));
             } else {
               emit(SearchLoadedState(userlist));
             }
           } else {
-            print('list1 is null');
-            emit(SearchErrorState('no matching results found'));
+            emit(const SearchErrorState('no matching results found'));
           }
         } else if (watchlistnum == 2) {
           final string2 = preferences.getString('tempwatchlist2');
@@ -43,14 +39,12 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
             final userList = jsonDecode(string2) as List;
             userlist = userList.map((e) => UserModel.fromJson(e)).toList();
             if (userList.isEmpty) {
-              emit(SearchErrorState('no matching results found'));
-
+              emit(const SearchErrorState('no matching results found'));
             } else {
               emit(SearchLoadedState(userlist));
             }
           } else {
-            print('list2 is null');
-            emit(SearchErrorState('no matching results found'));
+            emit(const SearchErrorState('no matching results found'));
           }
         } else {
           final string3 = preferences.getString('tempwatchlist3');
@@ -58,34 +52,17 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
             final userList = jsonDecode(string3) as List;
             userlist = userList.map((e) => UserModel.fromJson(e)).toList();
              if (userList.isEmpty) {
-              emit(SearchErrorState('no matching results found'));
+              emit(const SearchErrorState('no matching results found'));
 
             } else {
               emit(SearchLoadedState(userlist));
             }
           } else {
-            print('list3 is null');
-            emit(SearchErrorState('no matching results found'));
+            emit(const SearchErrorState('no matching results found'));
           }
         }
-
-        // final string1 = preferences.getString('watchlist1');
-        // if (string1 != null) {
-        //   final userList = jsonDecode(string1) as List;
-        //   watchList1 = userList.map((e) => UserModel.fromJson(e)).toList();
-        //   final users = watchList1;
-        //   if (users.length == 0) {
-        //     print('Watchlist1 is null');
-        //     emit(SearchErrorState('no matching results found'));
-        //   } else {
-        //     emit(SearchLoadedState(users));
-        //   }
-        // } else {
-        //   print('Watchlist1 is null');
-        //   emit(SearchErrorState('no matching results found'));
-        // }
       } catch (e) {
-        emit(SearchErrorState('no matching results found'));
+        emit(const SearchErrorState('no matching results found'));
       }
     });
   }

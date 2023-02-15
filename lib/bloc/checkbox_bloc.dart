@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import 'dart:convert';
@@ -14,7 +13,6 @@ class CheckboxBloc extends Bloc<CheckboxEvent, CheckboxState> {
 
   CheckboxBloc() : super(CheckboxInitial()) {
     on<CheckboxEvent>((event, emit) async {
-      print('called checkbox bloc');
 
       var preferences = await SharedPreferences.getInstance();
       final string1 = preferences.getString('watchlist1');
@@ -22,11 +20,8 @@ class CheckboxBloc extends Bloc<CheckboxEvent, CheckboxState> {
         final userList = jsonDecode(string1) as List;
         watchList = userList.map((e) => UserModel.fromJson(e)).toList();
         final users = watchList;
-        //print(users.toString());
-
         emit(CheckBoxLoadedState(users));
       } else {
-        print('Watchlist1 is null');
         // emit(SearchErrorState('no matching results found'));
       }
     });

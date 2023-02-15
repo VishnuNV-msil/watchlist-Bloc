@@ -14,7 +14,7 @@ class CheckboxInitial extends CheckboxState {
 
 class CheckBoxLoadedState extends CheckboxState {
   final List<UserModel> users;
-  CheckBoxLoadedState(this.users);
+  const CheckBoxLoadedState(this.users);
   @override
   List<Object?> get props => [users];
 }

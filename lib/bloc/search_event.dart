@@ -10,7 +10,7 @@ class ButtonPressEvent extends SearchEvent {
 
 class FetchDataEvent extends SearchEvent {
   final int intData;
-  FetchDataEvent(this.intData);
+  const FetchDataEvent(this.intData);
   @override
   List<Object> get props => [];
 }
