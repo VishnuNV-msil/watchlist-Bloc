@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 
 class UserRepository {
   Future<List<UserModel>> getUsers() async {
-    print('getUsers');
     final url = (Uri.parse(
         'http://5e53a76a31b9970014cf7c8c.mockapi.io/msf/getContacts'));
     var response = await http.get(url);

@@ -33,7 +33,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         userlist = userList.map((e) => UserModel.fromJson(e)).toList();
         emit(UserLoadedState(emptylist));
       } else {
-         final apiResponse = await _userRepository.getUsers();
+         _userRepository.getUsers();
          emit(UserLoadedState(emptylist));
       }
 

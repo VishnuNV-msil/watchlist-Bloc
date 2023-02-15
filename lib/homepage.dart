@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/user_bloc.dart';
-import '../model/user_model.dart';
 import '../repo/repositories.dart';
-import '../screens/search_screen.dart';
 import '../screens/watchlist_screen.dart';
-import './widgets/list.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

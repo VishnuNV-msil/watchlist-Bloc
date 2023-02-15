@@ -93,7 +93,6 @@ class SearchPage extends StatelessWidget {
       final userList = jsonDecode(string) as List;
       userlist = userList.map((e) => UserModel.fromJson(e)).toList();
     } else {
-      print('list is null');
     }
     List<UserModel> templist = [];
     for (int i = 0; i < userlist.length; i++) {
