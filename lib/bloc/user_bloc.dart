@@ -24,11 +24,20 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       emit(UserLoadingState());
       try {
         List<UserModel> userlist = [];
+        List<UserModel> userlist2 = [];
         var preferences = await SharedPreferences.getInstance();
         int watchlistnum = event.intData;
-        final users2 = await _userRepository.getUsers();
 
-
+         final fullListstring = preferences.getString('user_list');
+      if (fullListstring != null) {
+        final userList = jsonDecode(fullListstring) as List;
+        userlist = userList.map((e) => UserModel.fromJson(e)).toList();
+        emit(UserLoadedState(userlist2));
+      } else {
+         final users2 = await _userRepository.getUsers();
+         emit(UserLoadedState(userlist2));
+        print('list1 is null');
+      }
 
 
     if (watchlistnum == 1) {
@@ -59,13 +68,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         print('list3 is null');
       }
     }
-       
-
-
-        
-        // final users = await _userRepository.getUsers();
-        // userList = users;
-        // emit(UserLoadedState(users));
       } catch (e) {
         emit(UserErrorState(e.toString()));
       }
