@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/user_bloc.dart';
@@ -10,6 +8,7 @@ import './search_screen.dart';
 
 class WatchlistPage extends StatelessWidget {
   int watchlistnum;
+  List<UserModel> LoadedUserlist = [];
   WatchlistPage(this.watchlistnum);
 
   @override
@@ -27,10 +26,10 @@ class WatchlistPage extends StatelessWidget {
               );
             }
             if (state is UserLoadedState) {
-              List<UserModel> userList = state.users;
-              return Container(
-                child: UserList(userList),
+              LoadedUserlist = state.users;
+              return SizedBox(
                 height: MediaQuery.of(context).size.height - 100,
+                child: UserList(LoadedUserlist),
               );
             }
             if (state is UserErrorState) {
@@ -48,12 +47,11 @@ class WatchlistPage extends StatelessWidget {
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => SearchPage(watchlistnum),
+              builder: (context) => SearchPage(watchlistnum, LoadedUserlist),
             ),
           );
         },
       ),
     );
   }
-
 }

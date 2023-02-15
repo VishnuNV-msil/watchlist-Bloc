@@ -10,10 +10,11 @@ import '../model/user_model.dart';
 
 class SearchPage extends StatelessWidget {
   int watchlistnum;
+  List<UserModel> currentWatchlist;
   List<int> sel = [];
   List<UserModel> userlist1 = [];
 
-  SearchPage(this.watchlistnum);
+  SearchPage(this.watchlistnum, this.currentWatchlist);
   final TextEditingController _controller = TextEditingController();
 
   @override
@@ -141,7 +142,6 @@ class SearchPage extends StatelessWidget {
   }
 
   Widget SearchBar(BuildContext context) {
-    print('called listview from search');
     bool checkbox = false;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -174,7 +174,6 @@ class SearchPage extends StatelessWidget {
   }
 
   Widget SearchList(List<UserModel> userList, BuildContext context) {
-    print('called listview from search');
     return Expanded(
       child: ListView.builder(
         itemCount: userList.length,
@@ -203,9 +202,6 @@ class SearchPage extends StatelessWidget {
                     sel.remove(index);
                     userlist1.remove(userList[index]);
                   }
-
-                  print('sel list is : ${sel}');
-                  print('user list1 is : ${userlist1.toString()}');
                   addtoDB(userlist1);
                   BlocProvider.of<CheckboxBloc>(context)
                       .add(CheckboxPressEvent());
@@ -221,21 +217,19 @@ class SearchPage extends StatelessWidget {
   }
 
   Future<void> addtoDB(List<UserModel> userlist) async {
-    print('called add to DB');
     var pref = await SharedPreferences.getInstance();
-    List<UserModel> currentuserlist = [];
-    final stringlist = jsonEncode(currentuserlist); 
-
     if (watchlistnum == 1) {
-      pref.setString('watchlist1', stringlist);
+      userlist = userlist + currentWatchlist;
       final strList1 = jsonEncode(userlist);
-       pref.setString('watchlist1', strList1);
+      pref.setString('watchlist1', strList1);
     } else if (watchlistnum == 2) {
+      userlist = userlist + currentWatchlist;
       final strList2 = jsonEncode(userlist);
-       pref.setString('watchlist2', strList2);
+      pref.setString('watchlist2', strList2);
     } else {
+      userlist = userlist + currentWatchlist;
       final strList3 = jsonEncode(userlist);
-       pref.setString('watchlist3', strList3);
+      pref.setString('watchlist3', strList3);
     }
     return;
   }
