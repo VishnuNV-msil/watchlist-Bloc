@@ -29,7 +29,7 @@ class WatchlistPage extends StatelessWidget {
               LoadedUserlist = state.users;
               return SizedBox(
                 height: MediaQuery.of(context).size.height - 100,
-                child: UserList(LoadedUserlist),
+                child: userList(LoadedUserlist),
               );
             }
             if (state is UserErrorState) {

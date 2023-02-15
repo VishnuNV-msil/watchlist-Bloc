@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../model/user_model.dart';
 
-Widget UserList(List<UserModel> userList) {
+Widget userList(List<UserModel> userList) {
   return Expanded(
     child: ListView.builder(
       itemCount: userList.length,
