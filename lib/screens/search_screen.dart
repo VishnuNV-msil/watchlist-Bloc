@@ -7,8 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../bloc/search_bloc.dart';
 import '../bloc/checkbox_bloc.dart';
 import '../model/user_model.dart';
-import '../repo/repositories.dart';
-//import '../widgets/searchlist.dart';
 
 class SearchPage extends StatelessWidget {
   int watchlistnum;
@@ -55,7 +53,7 @@ class SearchPage extends StatelessWidget {
                   children: [
                     SearchBar(context),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height - 125,
+                      height: MediaQuery.of(context).size.height - 160,
                       width: MediaQuery.of(context).size.width,
                       child: BlocBuilder<CheckboxBloc, CheckboxState>(
                         builder: (context, state) {

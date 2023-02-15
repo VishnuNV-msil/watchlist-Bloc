@@ -4,7 +4,6 @@ import 'package:equatable/equatable.dart';
 import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../model/user_model.dart';
-import '../repo/repositories.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'checkbox_event.dart';

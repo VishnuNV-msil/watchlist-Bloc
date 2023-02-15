@@ -3,9 +3,7 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../model/user_model.dart';
-import '../repo/repositories.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../screens/search_screen.dart';
 
 part 'search_event.dart';
 part 'search_state.dart';

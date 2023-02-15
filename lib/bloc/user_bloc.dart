@@ -1,11 +1,10 @@
-import 'dart:developer';
+
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import '../model/user_model.dart';
 import '../repo/repositories.dart';
-import '../screens/watchlist_screen.dart';
 
 part 'user_event.dart';
 part 'user_state.dart';
