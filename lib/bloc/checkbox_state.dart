@@ -1,20 +1,13 @@
 part of 'checkbox_bloc.dart';
 
-abstract class CheckboxState extends Equatable {
-  const CheckboxState();
-  
-  @override
-  List<Object?> get props => [];
+abstract class CheckboxState {
+
 }
 
 class CheckboxInitial extends CheckboxState {
-  @override
-  List<Object?> get props => [];
+
 }
 
 class CheckBoxLoadedState extends CheckboxState {
-  final List<UserModel> users;
-  const CheckBoxLoadedState(this.users);
-  @override
-  List<Object?> get props => [users];
+
 }
