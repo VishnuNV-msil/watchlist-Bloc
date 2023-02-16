@@ -27,13 +27,20 @@ class SearchPage extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_sharp),
           onPressed: () {
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => HomePage(watchlistnum - 1),
-                ));
+            popscreen(context);
           },
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(
+              Icons.done_outline_rounded,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              popscreen(context);
+            },
+          )
+        ],
       ),
       body: MultiBlocProvider(
         providers: [
@@ -214,4 +221,14 @@ class SearchPage extends StatelessWidget {
     }
     return;
   }
+
+  void popscreen(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => HomePage(watchlistnum - 1),
+      ),
+    );
+  }
+  
 }
