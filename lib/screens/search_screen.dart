@@ -6,11 +6,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../bloc/search_bloc.dart';
 import '../bloc/checkbox_bloc.dart';
 import '../model/user_model.dart';
-import '../homepage.dart';
 
 // ignore: must_be_immutable
 class SearchPage extends StatelessWidget {
   int watchlistnum;
+  bool shouldReload = true;
   List<UserModel> currentWatchlist;
   List<int> selectedIndexList = [];
   List<UserModel> selecteduserlist = [];
@@ -21,85 +21,91 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Search'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_sharp),
-          onPressed: () {
-            popscreen(context);
-          },
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(
-              Icons.done_outline_rounded,
-              color: Colors.white,
-            ),
+    return WillPopScope(
+      onWillPop: () async {
+        popscreen(context);
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Search'),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_sharp),
             onPressed: () {
               popscreen(context);
             },
-          )
-        ],
-      ),
-      body: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => SearchBloc(),
           ),
-          BlocProvider(
-            create: (context) => CheckboxBloc(),
-          ),
-        ],
-        child: BlocBuilder<SearchBloc, SearchState>(
-          builder: (context, state) {
-            if (state is SearchLoadingState) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            if (state is SearchInitial) {
-              return Column(
-                children: [
-                  searchBar(context),
-                ],
-              );
-            }
-
-            if (state is SearchLoadedState) {
-              List<UserModel> userList = state.users;
-              return SingleChildScrollView(
-                child: Column(
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(
+                Icons.done_outline_rounded,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                popscreen(context);
+              },
+            )
+          ],
+        ),
+        body: MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => SearchBloc(),
+            ),
+            BlocProvider(
+              create: (context) => CheckboxBloc(),
+            ),
+          ],
+          child: BlocBuilder<SearchBloc, SearchState>(
+            builder: (context, state) {
+              if (state is SearchLoadingState) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              if (state is SearchInitial) {
+                return Column(
                   children: [
                     searchBar(context),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height - 160,
-                      width: MediaQuery.of(context).size.width,
-                      child: BlocBuilder<CheckboxBloc, CheckboxState>(
-                        builder: (context, state) {
-                          return searchList(userList, context);
-                        },
+                  ],
+                );
+              }
+    
+              if (state is SearchLoadedState) {
+                List<UserModel> userList = state.users;
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      searchBar(context),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height - 160,
+                        width: MediaQuery.of(context).size.width,
+                        child: BlocBuilder<CheckboxBloc, CheckboxState>(
+                          builder: (context, state) {
+                            return searchList(userList, context);
+                          },
+                        ),
                       ),
+                    ],
+                  ),
+                );
+              }
+              if (state is SearchErrorState) {
+                return Column(
+                  children: [
+                    searchBar(context),
+                    const Expanded(
+                      child: Text("No matching result"),
                     ),
                   ],
-                ),
-              );
-            }
-            if (state is SearchErrorState) {
-              return Column(
-                children: [
-                  searchBar(context),
-                  const Expanded(
-                    child: Text("No matching result"),
-                  ),
-                ],
-              );
-            } else {
-              return const Center(
-                child: Text("No matching result"),
-              );
-            }
-          },
+                );
+              } else {
+                return const Center(
+                  child: Text("No matching result"),
+                );
+              }
+            },
+          ),
         ),
       ),
     );
@@ -223,12 +229,6 @@ class SearchPage extends StatelessWidget {
   }
 
   void popscreen(BuildContext context) {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => HomePage(watchlistnum - 1),
-      ),
-    );
+    Navigator.pop(context, shouldReload);
   }
-  
 }

@@ -5,6 +5,7 @@ import '../model/user_model.dart';
 import '../repo/repositories.dart';
 import '../widgets/list.dart';
 import './search_screen.dart';
+import '../homepage.dart';
 
 // ignore: must_be_immutable
 class WatchlistPage extends StatelessWidget {
@@ -47,13 +48,29 @@ class WatchlistPage extends StatelessWidget {
         tooltip: 'Increment',
         child: const Icon(Icons.add),
         onPressed: () {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) => SearchPage(watchlistnum, loadedUserlist),
-            ),
-          );
+          _navigateAndDisplaySelection(context);
         },
       ),
     );
   }
+
+Future<void> _navigateAndDisplaySelection(BuildContext context) async {
+    // Navigator.push returns a Future that completes after calling
+    final shouldReload = await Navigator.push(
+      context,
+      MaterialPageRoute(
+              builder: (context) => SearchPage(watchlistnum, loadedUserlist),
+            ),
+    );
+    if (shouldReload) {
+       // ignore: use_build_context_synchronously
+       Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => HomePage(watchlistnum - 1),
+      ),
+    );
+    }
+  }
+
 }

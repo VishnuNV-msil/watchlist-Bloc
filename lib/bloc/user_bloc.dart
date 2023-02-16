@@ -29,8 +29,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
          final fullListstring = preferences.getString('user_list');
       if (fullListstring != null) {
-        final userList = jsonDecode(fullListstring) as List;
-        userlist = userList.map((e) => UserModel.fromJson(e)).toList();
         emit(UserLoadedState(emptylist));
       } else {
          _userRepository.getUsers();
