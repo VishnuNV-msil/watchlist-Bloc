@@ -6,9 +6,11 @@ import '../repo/repositories.dart';
 import '../widgets/list.dart';
 import './search_screen.dart';
 
+// ignore: must_be_immutable
 class WatchlistPage extends StatelessWidget {
   int watchlistnum;
   List<UserModel> loadedUserlist = [];
+  // ignore: use_key_in_widget_constructors
   WatchlistPage(this.watchlistnum);
 
   @override
@@ -45,7 +47,7 @@ class WatchlistPage extends StatelessWidget {
         tooltip: 'Increment',
         child: const Icon(Icons.add),
         onPressed: () {
-          Navigator.of(context).push(
+          Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (context) => SearchPage(watchlistnum, loadedUserlist),
             ),

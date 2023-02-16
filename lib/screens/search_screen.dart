@@ -6,13 +6,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../bloc/search_bloc.dart';
 import '../bloc/checkbox_bloc.dart';
 import '../model/user_model.dart';
+import '../homepage.dart';
 
+// ignore: must_be_immutable
 class SearchPage extends StatelessWidget {
   int watchlistnum;
   List<UserModel> currentWatchlist;
   List<int> sel = [];
   List<UserModel> userlist1 = [];
 
+  // ignore: use_key_in_widget_constructors
   SearchPage(this.watchlistnum, this.currentWatchlist);
   final TextEditingController _controller = TextEditingController();
 
@@ -21,6 +24,16 @@ class SearchPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Search'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_sharp),
+          onPressed: () {
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomePage(watchlistnum),
+                ));
+          },
+        ),
       ),
       body: MultiBlocProvider(
         providers: [
@@ -92,8 +105,7 @@ class SearchPage extends StatelessWidget {
     if (string != null) {
       final userList = jsonDecode(string) as List;
       userlist = userList.map((e) => UserModel.fromJson(e)).toList();
-    } else {
-    }
+    } else {}
     List<UserModel> templist = [];
     for (int i = 0; i < userlist.length; i++) {
       if (userlist.elementAt(i).name.contains(txt)) {
@@ -124,7 +136,7 @@ class SearchPage extends StatelessWidget {
           child: TextField(
             decoration: InputDecoration(
                 prefixIcon: const Icon(Icons.search),
-                labelText: 'Search & add to Watchlist: $watchlistnum',
+                labelText: 'Search & add to Watchlist: ${watchlistnum + 1}',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
                   borderSide: const BorderSide(color: Colors.black),
