@@ -12,8 +12,8 @@ import '../homepage.dart';
 class SearchPage extends StatelessWidget {
   int watchlistnum;
   List<UserModel> currentWatchlist;
-  List<int> sel = [];
-  List<UserModel> userlist1 = [];
+  List<int> selectedIndexList = [];
+  List<UserModel> selecteduserlist = [];
 
   // ignore: use_key_in_widget_constructors
   SearchPage(this.watchlistnum, this.currentWatchlist);
@@ -176,19 +176,19 @@ class SearchPage extends StatelessWidget {
                 activeColor: Colors.green,
                 checkColor: Colors.white,
                 onChanged: (value) {
-                  if ((sel.isEmpty) || !(sel.contains(index))) {
-                    sel.add(index);
-                    userlist1.add(userList[index]);
+                  if ((selectedIndexList.isEmpty) || !(selectedIndexList.contains(index))) {
+                    selectedIndexList.add(index);
+                    selecteduserlist.add(userList[index]);
                   } else {
-                    sel.remove(index);
-                    userlist1.remove(userList[index]);
+                    selectedIndexList.remove(index);
+                    selecteduserlist.remove(userList[index]);
                   }
-                  addtoDB(userlist1);
+                  addtoDB(selecteduserlist);
                   BlocProvider.of<CheckboxBloc>(context)
                       .add(CheckboxPressEvent());
                 },
                 selected: false,
-                value: sel.contains(index),
+                value: selectedIndexList.contains(index),
               ),
             ),
           );
