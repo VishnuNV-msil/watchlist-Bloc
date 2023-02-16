@@ -30,7 +30,7 @@ class SearchPage extends StatelessWidget {
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => HomePage(watchlistnum),
+                  builder: (context) => HomePage(watchlistnum - 1),
                 ));
           },
         ),
@@ -136,7 +136,7 @@ class SearchPage extends StatelessWidget {
           child: TextField(
             decoration: InputDecoration(
                 prefixIcon: const Icon(Icons.search),
-                labelText: 'Search & add to Watchlist: ${watchlistnum + 1}',
+                labelText: 'Search & add to Watchlist: $watchlistnum',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
                   borderSide: const BorderSide(color: Colors.black),

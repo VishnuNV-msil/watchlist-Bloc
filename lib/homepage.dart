@@ -40,9 +40,9 @@ class HomePage extends StatelessWidget {
               ]),
               title: const Text('The WatchlistApp')),
           body: TabBarView(children: [
-            WatchlistPage(0),
             WatchlistPage(1),
             WatchlistPage(2),
+            WatchlistPage(3),
           ]),
         ),
       ),
